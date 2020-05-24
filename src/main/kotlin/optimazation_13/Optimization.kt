@@ -1,11 +1,12 @@
 package optimazation_13
 
-import optimazation_13.examples.FindingElementExample
-import optimazation_13.examples.OperationOrderExample
-import optimazation_13.examples.PrimitiveCollectionExample
+import optimazation_13.examples.MutableCollectionExample
+import optimazation_13.ui.UI
 
-class Optimization {
-
+class Optimization(private val ui: UI) {
+    fun start(){
+        ui.showOutput("Opymalizacja ")
+    }
 }
 
 fun main() {
@@ -16,15 +17,9 @@ fun main() {
     println(operationOrderExample.incorrectRun())
 
     println("=============")
+    val mutableCollectionExample = MutableCollectionExample(5_000)
+    println(mutableCollectionExample.correctRun())
+    println(mutableCollectionExample.incorrectRun())
 
-    val findingElementExample = FindingElementExample(100, 10)
-    println(findingElementExample.correctRun())
-    println(findingElementExample.incorrectRun())
 
-    println("=============")
-
-    //Dopiero przy wartości 1_000_000_0 zaczyna mieć jakieś znaczenie, inaczej lista szybsza
-    val collectionExample = PrimitiveCollectionExample(1_000_000_0)
-    println(collectionExample.correctRun())
-    println(collectionExample.incorrectRun())
 }
