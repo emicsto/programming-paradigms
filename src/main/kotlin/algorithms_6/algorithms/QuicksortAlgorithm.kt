@@ -3,18 +3,19 @@ package algorithms_6.algorithms
 import java.util.*
 import kotlin.system.measureNanoTime
 
-class QuicksortAlgorithm(n: Int) : Algorithm {
+class QuicksortAlgorithm() : Algorithm {
     override val name = "Quicksort"
-
-    private var array = IntArray(n) { Random().nextInt() }
-    var arrayAsList = array.asList()
-
+    override val instruction = "Enter how many numbers you want to sort (numbers will be randomly generated): "
+    override var n: Int = 0
+    private var array = arrayOf<Int>().toIntArray()
 
     override fun recursive(): Long = measureNanoTime {
-        computeQuickSort(arrayAsList)
+        val arrayAsList = array.asList()
+        computeQuicksort(arrayAsList)
     }
 
     override fun iterative(): Long = measureNanoTime {
+        array = IntArray(n) { Random().nextInt() }
         var l = 0
         var h = array.size - 1
         val stack = IntArray(h - l + 1)
@@ -36,13 +37,13 @@ class QuicksortAlgorithm(n: Int) : Algorithm {
         }
     }
 
-    private fun <T : Comparable<T>> computeQuickSort(items: List<T>): List<T> {
+    private fun <T : Comparable<T>> computeQuicksort(items: List<T>): List<T> {
         if (items.count() < 1) return items
         val pivot = items[items.count() / 2]
         val equal = items.filter { it == pivot }
         val less = items.filter { it < pivot }
         val greater = items.filter { it > pivot }
-        return computeQuickSort(less) + equal + computeQuickSort(greater)
+        return computeQuicksort(less) + equal + computeQuicksort(greater)
     }
 
     private fun partition(arr: IntArray, low: Int, high: Int): Int {

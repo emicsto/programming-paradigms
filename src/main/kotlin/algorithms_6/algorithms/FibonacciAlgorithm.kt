@@ -2,8 +2,10 @@ package algorithms_6.algorithms
 
 import kotlin.system.measureNanoTime
 
-class FibonacciAlgorithm(private val n: Int) : Algorithm {
-    override val name = "Fibonacci"
+class FibonacciAlgorithm() : Algorithm {
+    override val name = "Fibonacci sequence"
+    override val instruction = "Enter which number should be found in the Fibonacci sequence: "
+    override var n: Int = 0
 
     override fun recursive(): Long = measureNanoTime { computeFibonacci(n) }
 
