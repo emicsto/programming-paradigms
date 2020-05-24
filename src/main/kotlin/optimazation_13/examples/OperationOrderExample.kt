@@ -1,7 +1,7 @@
 package optimazation_13.examples
 
 import kotlin.math.sqrt
-import kotlin.system.measureTimeMillis
+import kotlin.system.measureNanoTime
 
 class OperationOrderExample(size: Int) : Example {
 
@@ -21,12 +21,12 @@ class OperationOrderExample(size: Int) : Example {
         }
     }
 
-    override fun incorrectRun() = measureTimeMillis {
-        list.filter { isDividableByTwo(it.initialValue) }.map(::createQuadruple).map(::createSquareRoot)
+    override fun incorrectRun() = measureNanoTime {
+        list.map(::createQuadruple).map(::createSquareRoot).filter { isDividableByTwo(it.initialValue) }
     }
 
-    override fun correctRun(): Long = measureTimeMillis {
-        list.map(::createQuadruple).map(::createSquareRoot).filter { isDividableByTwo(it.initialValue) }
+    override fun correctRun(): Long = measureNanoTime {
+        list.filter { isDividableByTwo(it.initialValue) }.map(::createQuadruple).map(::createSquareRoot)
     }
 
     private fun createQuadruple(squaredNumber: SquaredNumber): QuadrupledNumber {
