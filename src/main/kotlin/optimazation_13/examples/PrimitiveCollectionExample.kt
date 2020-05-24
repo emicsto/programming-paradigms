@@ -4,7 +4,7 @@ import kotlin.system.measureNanoTime
 
 class PrimitiveCollectionExample(size: Int) : Example {
 
-    override val name: String = "Kolekcja z prymitywami"
+    override val id: ExampleFactory.ExampleId = ExampleFactory.ExampleId.PRIMITIVE_COLLECTION
 
     private val list: List<Int> = List(size) { it }
     private val intArray: IntArray = IntArray(size) { it }

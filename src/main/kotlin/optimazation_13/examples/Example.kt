@@ -2,7 +2,7 @@ package optimazation_13.examples
 
 interface Example {
 
-    val name: String
+    val id: ExampleFactory.ExampleId
 
     fun correctRun(): Long
 

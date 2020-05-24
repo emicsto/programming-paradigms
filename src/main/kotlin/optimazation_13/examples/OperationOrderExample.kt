@@ -11,7 +11,7 @@ class OperationOrderExample(size: Int) : Example {
 
     private data class SquareRoot(val initialValue: Int, val squareRootValue: Double)
 
-    override val name: String = "Kolejność operacji"
+    override val id: ExampleFactory.ExampleId = ExampleFactory.ExampleId.OPERATION_ORDER
 
     private val list: List<SquaredNumber> = List(size) { index ->
         if(index == 0) {
