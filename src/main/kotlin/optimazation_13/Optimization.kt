@@ -20,4 +20,11 @@ fun main() {
     val findingElementExample = FindingElementExample(100, 10)
     println(findingElementExample.correctRun())
     println(findingElementExample.incorrectRun())
+
+    println("=============")
+
+    //Dopiero przy wartości 1_000_000_0 zaczyna mieć jakieś znaczenie, inaczej lista szybsza
+    val collectionExample = PrimitiveCollectionExample(1_000_000_0)
+    println(collectionExample.correctRun())
+    println(collectionExample.incorrectRun())
 }
