@@ -9,8 +9,9 @@ class Optimization(private val ui: UI, private val exampleFactory: ExampleFactor
 
     private sealed class State {
         object SelectionMenu: State()
+        class AskForDescriptionSelected(val id: ExampleFactory.ExampleId): State()
         class ExampleSelected(val id: ExampleFactory.ExampleId): State()
-        class ExampleCreated(val example: Example): State()
+        class ExampleReady(val example: Example): State()
     }
 
     private var state: State = State.SelectionMenu
@@ -29,9 +30,20 @@ class Optimization(private val ui: UI, private val exampleFactory: ExampleFactor
     private fun handleState(currentState: State) {
         when (currentState) {
             State.SelectionMenu -> handleSelectionMenuState()
-            is State.ExampleSelected -> handleExampleSelectedState(currentState)
-            is State.ExampleCreated -> handleExampleCreatedState(currentState)
+            is State.AskForDescriptionSelected -> handleAskForDescriptionSelectedState(currentState.id)
+            is State.ExampleSelected -> handleExampleSelectedState(currentState.id)
+            is State.ExampleReady -> handleExampleCreatedState(currentState.example)
         }
+    }
+
+    private fun handleAskForDescriptionSelectedState(exampleId: ExampleFactory.ExampleId) {
+        val userInput = getCorrectUserInput("Pokazać opis? (T/N)", ::isCorrectChoiceInput)
+        val shouldShowDescription = userInput == "T"
+        if(shouldShowDescription){
+            ui.showOutput(exampleId.description)
+        }
+
+        state = State.ExampleSelected(exampleId)
     }
 
     private fun handleSelectionMenuState() {
@@ -51,7 +63,7 @@ class Optimization(private val ui: UI, private val exampleFactory: ExampleFactor
         val selectedExampleLp = userInput.toInt()
         val exampleId = ExampleFactory.ExampleId.values().find { it.lp == selectedExampleLp }
         state = if(exampleId != null){
-            State.ExampleSelected(exampleId)
+            State.AskForDescriptionSelected(exampleId)
         } else {
             State.SelectionMenu
         }
@@ -62,15 +74,13 @@ class Optimization(private val ui: UI, private val exampleFactory: ExampleFactor
         return number in 1 .. ExampleFactory.ExampleId.values().count()
     }
 
-    private fun handleExampleSelectedState(currentState: State.ExampleSelected) {
-        val exerciseId = currentState.id
-        val size = getExerciseListSize()
-        val example = exampleFactory.getExample(exerciseId, size)
-
-        state = State.ExampleCreated(example)
+    private fun handleExampleSelectedState(exampleId: ExampleFactory.ExampleId) {
+        val size = getExampleListSize()
+        val example = exampleFactory.getExample(exampleId, size)
+        state = State.ExampleReady(example)
     }
 
-    private fun getExerciseListSize(): Int {
+    private fun getExampleListSize(): Int {
         val userInput = getCorrectUserInput("Podaj rozmiar listy: ", ::isCorrectListSize)
 
         return userInput.toInt()
@@ -80,22 +90,22 @@ class Optimization(private val ui: UI, private val exampleFactory: ExampleFactor
         return input.toIntOrNull() !== null
     }
 
-    private fun handleExampleCreatedState(currentState: State.ExampleCreated) {
+    private fun handleExampleCreatedState(example: Example) {
         println("Zła implementacja")
-        val incorrectTime = currentState.example.incorrectRun()
+        val incorrectTime = example.incorrectRun()
         println("Czas wykonania: $incorrectTime")
         println()
         println("Dobra implementacja")
-        val correctTime = currentState.example.correctRun()
+        val correctTime = example.correctRun()
         println("Czas wykonania: $correctTime")
 
-        askToContinue(currentState.example.id)
+        askToContinue(example.id)
     }
 
     private fun askToContinue(exampleId: ExampleFactory.ExampleId) {
         val userInput = getCorrectUserInput(
-                "Powtórzyć algorytm z innym rozmiarem (T/N)?",
-                ::isCorrectContinueInput
+                "Powtórzyć algorytm z innym rozmiarem? (T/N)",
+                ::isCorrectChoiceInput
         )
 
         state = if(userInput == "T"){
@@ -105,7 +115,7 @@ class Optimization(private val ui: UI, private val exampleFactory: ExampleFactor
         }
     }
 
-    private fun isCorrectContinueInput(string: String): Boolean = (string == "T" || string == "N")
+    private fun isCorrectChoiceInput(string: String): Boolean = (string == "T" || string == "N")
 
     private fun getCorrectUserInput(inputText: String, predicateFunction: (String) -> Boolean): String {
         var userInput = ""
