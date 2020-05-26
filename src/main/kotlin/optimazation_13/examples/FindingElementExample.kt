@@ -11,6 +11,7 @@ class FindingElementExample(private val size: Int) : Example {
     private val list: List<Int> = List(size) { it }
     private val sequence: Sequence<Int> = list.asSequence()
 
+    //TODO use
     fun setIndexToFind(index: Int): Boolean =
             if(index in 0 until size){
                 elementIndexToFind = index

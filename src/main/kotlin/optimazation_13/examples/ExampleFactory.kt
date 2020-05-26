@@ -16,4 +16,10 @@ class ExampleFactory {
             ExampleId.MUTABLE_COLLECTION to { size -> MutableCollectionExample(size) }
     )
 
+    fun getExample(exampleId: ExampleId, size: Int): Example {
+        val factory = examples[exampleId] ?: throw IllegalArgumentException("exampleId is incorred $exampleId")
+
+        return factory(size)
+    }
+
 }
