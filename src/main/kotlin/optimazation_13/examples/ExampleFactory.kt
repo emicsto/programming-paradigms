@@ -7,7 +7,7 @@ class ExampleFactory {
             1,
             "Kolejność funkcyjnych operacji na listach",
             """
-                https://github.com/emicsto/programming-paradigms/blob/optimization/src/main/kotlin/optimazation_13/examples/OperationOrderExample.kt
+                https://github.com/emicsto/programming-paradigms/tree/master/src/main/kotlin/optimazation_13/examples/OperationOrderExample.kt
                 
                 Przed rozpocząciem algorytmu, tworzona jest lista z podanym rozmiarem, gdzie każdy element listy odpowiada kwadracie swojego indeksu (index * index).
                 Algorytm polega na wykonaniu następujących funkcyjnych operacjach na liście:
@@ -28,7 +28,7 @@ class ExampleFactory {
             2,
             "Szukanie elementu w kolekcji",
             """
-                https://github.com/emicsto/programming-paradigms/blob/optimization/src/main/kotlin/optimazation_13/examples/FindingElementExample.kt
+                https://github.com/emicsto/programming-paradigms/tree/master/src/main/kotlin/optimazation_13/examples/FindingElementExample.kt
                 
                 Przed rozpocząciem algorytmu, tworzona jest lista oraz sekwencja w których każdy element odpowiada swojemu indeksowi
                 
@@ -50,7 +50,7 @@ class ExampleFactory {
 //            "Operacje na kolekcji z liczbami prostymi",
 //            """
 //
-//                https://github.com/emicsto/programming-paradigms/blob/optimization/src/main/kotlin/optimazation_13/examples/PrimitiveCollectionExample.kt
+//                https://github.com/emicsto/programming-paradigms/tree/master/src/main/kotlin/optimazation_13/examples/PrimitiveCollectionExample.kt
 //
 //                W języku programowania Java,
 //
@@ -60,7 +60,7 @@ class ExampleFactory {
             3,
             "Porównanie operacji na kolekcji (niezmiennej - immutable oraz zmiennej - mutable)",
             """
-                https://github.com/emicsto/programming-paradigms/blob/optimization/src/main/kotlin/optimazation_13/examples/MutableCollectionExample.kt
+                https://github.com/emicsto/programming-paradigms/tree/master/src/main/kotlin/optimazation_13/examples/MutableCollectionExample.kt
                 
                 Przed rozpoczęciem algorytmu, tworzona jest lista w której każdy element odpowiada swojemu indeksowi.
                  
