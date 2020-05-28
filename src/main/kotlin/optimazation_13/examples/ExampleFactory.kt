@@ -9,7 +9,7 @@ class ExampleFactory {
             """
                 https://github.com/emicsto/programming-paradigms/tree/master/src/main/kotlin/optimazation_13/examples/OperationOrderExample.kt
                 
-                Przed rozpocząciem algorytmu, tworzona jest lista z podanym rozmiarem, gdzie każdy element listy odpowiada kwadracie swojego indeksu (index * index).
+                Przed rozpocząciem algorytmu, tworzona jest lista z podanym rozmiarem, gdzie każdy element listy odpowiada kwadratowi swojego indeksu (index * index).
                 Algorytm polega na wykonaniu następujących funkcyjnych operacjach na liście:
                 - (map) Wyliczenie czterokrotności dla każdego elementu listy
                 - (map) Wyliczenie pierwiastka kwadratowego dla każdego elementu listy
