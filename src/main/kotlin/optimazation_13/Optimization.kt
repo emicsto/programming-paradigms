@@ -2,8 +2,11 @@ package optimazation_13
 
 import optimazation_13.examples.Example
 import optimazation_13.examples.ExampleFactory
+import optimazation_13.examples.FindingElementExample
 import optimazation_13.ui.CLI
 import optimazation_13.ui.UI
+import optimazation_13.utils.formatToTimeString
+import kotlin.system.exitProcess
 
 class Optimization(private val ui: UI, private val exampleFactory: ExampleFactory) {
 
@@ -17,7 +20,7 @@ class Optimization(private val ui: UI, private val exampleFactory: ExampleFactor
     private var state: State = State.SelectionMenu
 
     fun start(){
-        ui.showOutput("Optymalizacja kodu źródłowego")
+        ui.showOutput("Optymalizacja kodu źródłowego (Aby wyjść wpisz quit)")
         runLoop()
     }
 
@@ -32,14 +35,13 @@ class Optimization(private val ui: UI, private val exampleFactory: ExampleFactor
             State.SelectionMenu -> handleSelectionMenuState()
             is State.AskForDescriptionSelected -> handleAskForDescriptionSelectedState(currentState.id)
             is State.ExampleSelected -> handleExampleSelectedState(currentState.id)
-            is State.ExampleReady -> handleExampleCreatedState(currentState.example)
+            is State.ExampleReady -> handleExampleReadyState(currentState.example)
         }
     }
 
     private fun handleAskForDescriptionSelectedState(exampleId: ExampleFactory.ExampleId) {
-        val userInput = getCorrectUserInput("Pokazać opis? (T/N)", ::isCorrectChoiceInput)
-        val shouldShowDescription = userInput == "T"
-        if(shouldShowDescription){
+        val userInput = getCorrectUserInput("Pokazać opis? (T/N): ", ::isCorrectChoiceInput)
+        if(isChoicePositive(userInput)){
             ui.showOutput(exampleId.description)
         }
 
@@ -52,6 +54,7 @@ class Optimization(private val ui: UI, private val exampleFactory: ExampleFactor
     }
 
     private fun listAllPossibleExamples(){
+        ui.showOutput()
         ExampleFactory.ExampleId.values().forEach { exampleId ->
             ui.showOutput("${exampleId.lp}. ${exampleId.title}")
         }
@@ -77,6 +80,7 @@ class Optimization(private val ui: UI, private val exampleFactory: ExampleFactor
     private fun handleExampleSelectedState(exampleId: ExampleFactory.ExampleId) {
         val size = getExampleListSize()
         val example = exampleFactory.getExample(exampleId, size)
+        handleSpecialExampleCase(example)
         state = State.ExampleReady(example)
     }
 
@@ -87,40 +91,75 @@ class Optimization(private val ui: UI, private val exampleFactory: ExampleFactor
     }
 
     private fun isCorrectListSize(input: String): Boolean {
+        return isCorrectNumber(input) && input.toInt() < Integer.MAX_VALUE
+    }
+
+    private fun handleSpecialExampleCase(example: Example) {
+        if(example is FindingElementExample){
+            while (true){
+                val userInput = getCorrectUserInput("Podaj element do wyszukania: ", ::isCorrectNumber)
+
+                val wasIndexSet = example.setIndexToFind(userInput.toInt())
+                if(wasIndexSet) {
+                    break
+                }
+            }
+        }
+    }
+
+    private fun isCorrectNumber(input: String): Boolean {
         return input.toIntOrNull() !== null
     }
 
-    private fun handleExampleCreatedState(example: Example) {
-        println("Zła implementacja")
+    private fun handleExampleReadyState(example: Example) {
+        ui.showOutput()
+
+        ui.showOutput("Zła implementacja")
         val incorrectTime = example.incorrectRun()
-        println("Czas wykonania: $incorrectTime")
-        println()
-        println("Dobra implementacja")
+        prettyPrintTime(incorrectTime)
+
+        ui.showOutput("Dobra implementacja")
         val correctTime = example.correctRun()
-        println("Czas wykonania: $correctTime")
+        prettyPrintTime(correctTime)
 
         askToContinue(example.id)
     }
 
+    private fun prettyPrintTime(time: Long){
+        ui.showOutput("Czas wykonania: ${time.formatToTimeString()}")
+        ui.showOutput()
+    }
+
     private fun askToContinue(exampleId: ExampleFactory.ExampleId) {
         val userInput = getCorrectUserInput(
-                "Powtórzyć algorytm z innym rozmiarem? (T/N)",
+                "Powtórzyć algorytm z innym rozmiarem? (T/N): ",
                 ::isCorrectChoiceInput
         )
 
-        state = if(userInput == "T"){
+        state = if(isChoicePositive(userInput)){
             State.ExampleSelected(exampleId)
         } else {
             State.SelectionMenu
         }
     }
 
-    private fun isCorrectChoiceInput(string: String): Boolean = (string == "T" || string == "N")
+    private fun isCorrectChoiceInput(string: String): Boolean = (isChoicePositive(string) || isChoiceNegative(string))
+
+    private fun isChoicePositive(string: String): Boolean = (string.toLowerCase() == "t")
+
+    private fun isChoiceNegative(string: String): Boolean = (string.toLowerCase() == "n")
 
     private fun getCorrectUserInput(inputText: String, predicateFunction: (String) -> Boolean): String {
+        var inputCount = 0
         var userInput = ""
         while (!predicateFunction(userInput)){
             userInput = ui.getUserInput(inputText)
+
+            if(userInput == "quit" || inputCount > 10){
+                exitProcess(0)
+            }
+
+            inputCount++
         }
 
         return userInput
@@ -132,28 +171,4 @@ fun main() {
     val examplesFactory = ExampleFactory()
     val optimization = Optimization(ui, examplesFactory)
     optimization.start()
-
-//    val operationOrderExample = OperationOrderExample(30)
-//    println(operationOrderExample.correctRun())
-//    println(operationOrderExample.incorrectRun())
-//
-//    println("=============")
-//
-//    val findingElementExample = FindingElementExample(100, 10)
-//    println(findingElementExample.correctRun())
-//    println(findingElementExample.incorrectRun())
-//
-//    println("=============")
-//
-//    //Dopiero przy wartości 1_000_000_0 zaczyna mieć jakieś znaczenie, inaczej lista szybsza
-//    val primitiveCollectionExample = PrimitiveCollectionExample(1_000_000_0)
-//    println(primitiveCollectionExample.correctRun())
-//    println(primitiveCollectionExample.incorrectRun())
-
-//    println("=============")
-//    val mutableCollectionExample = MutableCollectionExample(5_000)
-//    println(mutableCollectionExample.correctRun())
-//    println(mutableCollectionExample.incorrectRun())
-
-
 }
