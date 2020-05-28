@@ -3,8 +3,8 @@ package algorithms_6.algorithms
 import kotlin.system.measureNanoTime
 
 class HanoiTowerAlgorithm() : Algorithm {
-    override val name = " Hanoi tower problem"
-    override val instruction = "Enter the initial number of disks: "
+    override val name = "Wieże Hanoi"
+    override val instruction = "Podaj początkową liczbę krążków: "
     override var n: Int = 0
 
     override fun iterative(): Long = measureNanoTime {

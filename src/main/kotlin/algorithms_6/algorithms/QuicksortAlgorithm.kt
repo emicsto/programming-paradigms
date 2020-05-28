@@ -5,7 +5,7 @@ import kotlin.system.measureNanoTime
 
 class QuicksortAlgorithm() : Algorithm {
     override val name = "Quicksort"
-    override val instruction = "Enter how many numbers you want to sort (numbers will be randomly generated): "
+    override val instruction = "Podaj ile liczb powinno zostać posortowanych: "
     override var n: Int = 0
     private var array = arrayOf<Int>().toIntArray()
 
