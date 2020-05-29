@@ -3,7 +3,7 @@ package algorithms_6
 import algorithms_6.algorithms.FibonacciAlgorithm
 import algorithms_6.algorithms.HanoiTowerAlgorithm
 import algorithms_6.algorithms.QuicksortAlgorithm
-import optimazation_13.utils.formatToTimeString
+import utils.formatToTimeString
 import java.util.*
 import kotlin.system.exitProcess
 
