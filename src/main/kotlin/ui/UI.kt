@@ -1,4 +1,4 @@
-package optimazation_13.ui
+package ui
 
 interface UI {
 

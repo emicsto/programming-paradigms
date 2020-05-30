@@ -3,9 +3,9 @@ package optimazation_13
 import optimazation_13.examples.Example
 import optimazation_13.examples.ExampleFactory
 import optimazation_13.examples.FindingElementExample
-import optimazation_13.ui.CLI
-import optimazation_13.ui.UI
-import optimazation_13.utils.formatToTimeString
+import ui.CLI
+import ui.UI
+import utils.formatToTimeString
 import kotlin.system.exitProcess
 
 class Optimization(private val ui: UI, private val exampleFactory: ExampleFactory) {
