@@ -166,7 +166,7 @@ class Optimization(private val ui: UI, private val exampleFactory: ExampleFactor
     }
 }
 
-fun main() {
+fun main(args: Array<String>) {
     val ui = CLI()
     val examplesFactory = ExampleFactory()
     val optimization = Optimization(ui, examplesFactory)

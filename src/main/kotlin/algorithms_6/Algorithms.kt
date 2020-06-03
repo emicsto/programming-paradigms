@@ -8,11 +8,7 @@ import utils.formatToTimeString
 import java.util.*
 import kotlin.system.exitProcess
 
-class Algorithms {
-
-}
-
-fun main() {
+fun main(args: Array<String>) {
 
     val reader = Scanner(System.`in`)
 
