@@ -19,3 +19,23 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
+
+task implementation_6 {
+    jar {
+        manifest {
+            attributes 'Main-Class': 'algorithms_6.AlgorithmsKt'
+        }
+        from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    }
+}
+
+task implementation_13 {
+    jar {
+        manifest {
+            attributes (
+                    'Main-Class': 'optimazation_13.OptimizationKt',
+            )
+        }
+        from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    }
+}
