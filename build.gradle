@@ -1,6 +1,19 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
+    }
+}
+
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.3.72'
+    id "com.github.johnrengelman.shadow" version "5.2.0"
 }
+
+
+apply plugin: 'com.github.johnrengelman.shadow'
 
 group 'pl.edu.us'
 version '1.0-SNAPSHOT'
@@ -20,22 +33,29 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-task implementation_6 {
-    jar {
-        manifest {
-            attributes 'Main-Class': 'algorithms_6.AlgorithmsKt'
-        }
-        from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
-    }
-}
+//task implementation_6 {
+//    jar {
+//        manifest {
+//            attributes 'Main-Class': 'algorithms_6.AlgorithmsKt'
+//        }
+//        from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+//    }
+//}
+//
+//task implementation_13 {
+//    jar {
+//        manifest {
+//            attributes (
+//                    'Main-Class': 'optimazation_13.OptimizationKt',
+//            )
+//        }
+//        from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+//    }
+//}
 
-task implementation_13 {
-    jar {
-        manifest {
-            attributes (
-                    'Main-Class': 'optimazation_13.OptimizationKt',
-            )
-        }
-        from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
-    }
-}
+//task shadowJarFoo(type: com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
+//    archiveName = 'Optimization.jar'
+////    mainClassName = 'optimazation_13.Optimization.kt'
+//    from sourceSets.main.output //tells the task to include the project code
+//    configurations = [ configurations.runtime ] //tells the task to shadow in the jars files in the 'runtime' scope
+//}

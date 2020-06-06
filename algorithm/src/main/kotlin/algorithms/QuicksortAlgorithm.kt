@@ -1,4 +1,4 @@
-package algorithms_6.algorithms
+package algorithms
 
 import java.util.*
 import kotlin.system.measureNanoTime

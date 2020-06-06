@@ -1,4 +1,4 @@
-package optimazation_13.examples
+package examples
 
 class ExampleFactory {
 
@@ -77,10 +77,22 @@ class ExampleFactory {
     }
 
     private val examples = mapOf<ExampleId, (Int) -> Example>(
-            ExampleId.OPERATION_ORDER to { size -> OperationOrderExample(size) },
-            ExampleId.FINDING_ELEMENT to { size -> FindingElementExample(size) },
+            ExampleId.OPERATION_ORDER to { size ->
+                OperationOrderExample(
+                    size
+                )
+            },
+            ExampleId.FINDING_ELEMENT to { size ->
+                FindingElementExample(
+                    size
+                )
+            },
 //            ExampleId.PRIMITIVE_COLLECTION to { size -> PrimitiveCollectionExample(size) },
-            ExampleId.MUTABLE_COLLECTION to { size -> MutableCollectionExample(size) }
+            ExampleId.MUTABLE_COLLECTION to { size ->
+                MutableCollectionExample(
+                    size
+                )
+            }
     )
 
     fun getExample(exampleId: ExampleId, size: Int): Example {

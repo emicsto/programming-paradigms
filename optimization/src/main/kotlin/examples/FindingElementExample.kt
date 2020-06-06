@@ -1,10 +1,11 @@
-package optimazation_13.examples
+package examples
 
 import kotlin.system.measureNanoTime
 
 class FindingElementExample(private val size: Int) : Example {
 
-    override val id: ExampleFactory.ExampleId = ExampleFactory.ExampleId.FINDING_ELEMENT
+    override val id: ExampleFactory.ExampleId =
+        ExampleFactory.ExampleId.FINDING_ELEMENT
 
     var elementIndexToFind: Int = 0
 

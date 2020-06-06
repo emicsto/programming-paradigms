@@ -1,4 +1,4 @@
-package optimazation_13.examples
+package examples
 
 import kotlin.system.measureNanoTime
 

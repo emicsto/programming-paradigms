@@ -1,4 +1,4 @@
-package algorithms_6.algorithms
+package algorithms
 
 interface Algorithm {
     val name: String

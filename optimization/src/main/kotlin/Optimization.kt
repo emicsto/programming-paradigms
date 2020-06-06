@@ -1,8 +1,6 @@
-package optimazation_13
-
-import optimazation_13.examples.Example
-import optimazation_13.examples.ExampleFactory
-import optimazation_13.examples.FindingElementExample
+import examples.Example
+import examples.ExampleFactory
+import examples.FindingElementExample
 import ui.CLI
 import ui.UI
 import utils.formatToTimeString
@@ -165,6 +163,7 @@ class Optimization(private val ui: UI, private val exampleFactory: ExampleFactor
         return userInput
     }
 }
+
 
 fun main(args: Array<String>) {
     val ui = CLI()

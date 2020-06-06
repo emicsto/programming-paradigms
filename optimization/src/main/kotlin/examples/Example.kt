@@ -1,4 +1,4 @@
-package optimazation_13.examples
+package examples
 
 interface Example {
 

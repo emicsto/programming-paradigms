@@ -1,10 +1,11 @@
-package optimazation_13.examples
+package examples
 
 import kotlin.system.measureNanoTime
 
 class MutableCollectionExample(size: Int) : Example {
 
-    override val id: ExampleFactory.ExampleId = ExampleFactory.ExampleId.MUTABLE_COLLECTION
+    override val id: ExampleFactory.ExampleId =
+        ExampleFactory.ExampleId.MUTABLE_COLLECTION
 
     private val list: List<Int> = List(size) { it }
 

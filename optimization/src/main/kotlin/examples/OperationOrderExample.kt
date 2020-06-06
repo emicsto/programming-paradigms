@@ -1,4 +1,4 @@
-package optimazation_13.examples
+package examples
 
 import kotlin.math.sqrt
 import kotlin.system.measureNanoTime
@@ -11,7 +11,8 @@ class OperationOrderExample(size: Int) : Example {
 
     private data class SquareRoot(val squareRootValue: Double)
 
-    override val id: ExampleFactory.ExampleId = ExampleFactory.ExampleId.OPERATION_ORDER
+    override val id: ExampleFactory.ExampleId =
+        ExampleFactory.ExampleId.OPERATION_ORDER
 
     private val list: List<SquaredNumber> = List(size) { index ->
         if(index == 0) {

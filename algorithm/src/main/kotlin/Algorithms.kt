@@ -1,9 +1,7 @@
-package algorithms_6
-
-import algorithms_6.algorithms.Algorithm
-import algorithms_6.algorithms.FibonacciAlgorithm
-import algorithms_6.algorithms.HanoiTowerAlgorithm
-import algorithms_6.algorithms.QuicksortAlgorithm
+import algorithms.Algorithm
+import algorithms.FibonacciAlgorithm
+import algorithms.HanoiTowerAlgorithm
+import algorithms.QuicksortAlgorithm
 import utils.formatToTimeString
 import java.util.*
 import kotlin.system.exitProcess
