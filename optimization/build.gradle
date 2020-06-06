@@ -1,6 +1,18 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
+    }
+}
+
 plugins {
     id 'org.jetbrains.kotlin.jvm'
+    id "com.github.johnrengelman.shadow"
 }
+
+apply plugin: 'com.github.johnrengelman.shadow'
 
 group 'pl.edu.us'
 version '1.0-SNAPSHOT'
@@ -20,4 +32,17 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+shadowJar{
+    manifest {
+        attributes 'Main-Class': 'OptimizationKt'
+    }
+
+    mergeServiceFiles('META-INF/spring.*')
+    exclude "META-INF/*.SF"
+    exclude "META-INF/*.DSA"
+    exclude "META-INF/*.RSA"
+    exclude "META-INF/LICENSE"
+    archiveFileName = "opimization.jar"
 }

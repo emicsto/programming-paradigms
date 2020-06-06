@@ -12,7 +12,6 @@ plugins {
     id "com.github.johnrengelman.shadow" version "5.2.0"
 }
 
-
 apply plugin: 'com.github.johnrengelman.shadow'
 
 group 'pl.edu.us'
